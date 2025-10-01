@@ -42,7 +42,10 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
   };
 
   return (
-    <div className="bg-[var(--card-bg)] rounded-lg p-5 mt-4 mb-4 max-w-md w-full border border-[var(--border)] shadow-sm">
+    <div 
+      style={{ boxShadow: 'var(--shadow)' }}
+      className="bg-[var(--card-bg)] rounded-lg p-5 mt-4 mb-4 max-w-md w-full border border-[var(--border)]"
+    >
       {/* Header with tool name and status */}
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-[var(--foreground)] font-medium text-sm">🔧 {name}</h3>

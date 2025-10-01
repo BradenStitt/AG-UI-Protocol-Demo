@@ -114,7 +114,7 @@ button, a {
 [class*="copilotKitInput"] textarea,
 [class*="copilotKitInput"] input,
 [class*="textInput"] {
-  background: var(--background) !important;
+  background: var(--card-bg) !important;
   color: var(--foreground) !important;
   border-color: var(--border) !important;
 }
@@ -132,7 +132,7 @@ button, a {
 .copilotKitInput input::placeholder,
 [class*="copilotKitInput"] textarea::placeholder,
 [class*="copilotKitInput"] input::placeholder {
-  color: #9ca3af !important;
+  color: var(--text-muted) !important;
 }
 
 /* Send Button and Accent Buttons */
