@@ -75,6 +75,7 @@ function TodoCard({
   return (
     <div
       ref={cardRef}
+      data-todo-id={todo.id}
       style={{
         boxShadow: isDragging ? 'var(--shadow-lg)' : 'var(--shadow)',
       }}

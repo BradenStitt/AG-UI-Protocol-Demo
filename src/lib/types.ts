@@ -1,4 +1,4 @@
-// 🪁 Frontend State Types
+// Frontend State Types
 // These types must match the Pydantic models in agent.py
 // TypeScript `optional?` maps to Python `Field(default=None)`
 // This ensures seamless state synchronization between frontend and backend
