@@ -10,7 +10,7 @@ import { BackendToolsCard } from "@/components/backend-tools";
 import { initialState } from "@/lib/defaults";
 
 export default function Home() {
-  const [themeColor, setThemeColor] = useState("#6366f1");
+  const [themeColor, setThemeColor] = useState("#FF7F50");
 
   /*
     Shared State with Agent
@@ -62,7 +62,7 @@ export default function Home() {
         disableSystemMessage={true}
         labels={{
           title: "Todo Assistant",
-          initial: "👋 Hi! I can help you manage your todos.",
+          initial: "Hi! I can help you manage your todos.",
         }}
         suggestions={[
           { title: "Add Todos", message: "Add a todo to build a website." },
@@ -73,10 +73,7 @@ export default function Home() {
           { title: "Read State", message: "What todos do I have?" },
         ]}
       >
-        <div
-          style={{ backgroundColor: themeColor }}
-          className="h-screen w-full transition-colors duration-300"
-        >
+        <div className="h-screen w-full bg-[#f9f9f9]">
           <TodoBoard state={state} setState={setState} />
         </div>
       </CopilotSidebar>

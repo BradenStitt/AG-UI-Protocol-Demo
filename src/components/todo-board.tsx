@@ -75,11 +75,11 @@ function TodoCard({
   return (
     <div
       ref={cardRef}
-      className={`bg-white/10 p-3 rounded-lg text-white relative group hover:bg-white/15 transition-all h-24 ${
+      className={`bg-white p-4 rounded-lg border border-gray-200 relative group hover:shadow-md transition-all ${
         !isEditingTitle && !isEditingDescription ? "cursor-move" : ""
-      } ${isDragging ? "opacity-50" : ""}`}
+      } ${isDragging ? "opacity-50 shadow-lg" : "shadow-sm"}`}
     >
-      <div className="flex items-start gap-3 h-full">
+      <div className="flex items-start gap-3">
         {/* Checkbox button */}
         <button
           onClick={(e) => {
@@ -88,14 +88,14 @@ function TodoCard({
           }}
           className={`flex-shrink-0 w-5 h-5 mt-0.5 rounded border-2 transition-all ${
             todo.status === "done"
-              ? "bg-white/90 border-white"
-              : "bg-white/10 border-white/50 hover:border-white/80"
+              ? "bg-gray-900 border-gray-900"
+              : "bg-white border-gray-300 hover:border-gray-500"
           }`}
           title={todo.status === "done" ? "Mark incomplete" : "Mark complete"}
         >
           {todo.status === "done" && (
             <svg
-              className="w-full h-full text-gray-800"
+              className="w-full h-full text-white"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -109,7 +109,7 @@ function TodoCard({
         </button>
 
         {/* Content */}
-        <div className="flex-1 min-w-0 flex flex-col">
+        <div className="flex-1 min-w-0 flex flex-col gap-1">
           <div
             ref={titleRef}
             contentEditable
@@ -117,8 +117,8 @@ function TodoCard({
             onFocus={() => setIsEditingTitle(true)}
             onBlur={handleTitleBlur}
             onKeyDown={(e) => handleKeyDown(e, true)}
-            className={`font-medium mb-1 truncate outline-none focus:bg-white/10 focus:px-1 focus:-mx-1 rounded cursor-text ${
-              todo.status === "done" ? "line-through opacity-60" : ""
+            className={`font-medium text-gray-900 outline-none focus:bg-gray-50 focus:px-2 focus:-mx-2 rounded cursor-text ${
+              todo.status === "done" ? "line-through text-gray-500" : ""
             }`}
             title={todo.title}
           >
@@ -131,9 +131,9 @@ function TodoCard({
             onFocus={() => setIsEditingDescription(true)}
             onBlur={handleDescriptionBlur}
             onKeyDown={(e) => handleKeyDown(e, false)}
-            className={`text-sm text-white/70 line-clamp-2 outline-none focus:bg-white/10 focus:px-1 focus:-mx-1 rounded cursor-text ${
-              todo.status === "done" ? "line-through opacity-50" : ""
-            } ${!todo.description ? "text-white/40" : ""}`}
+            className={`text-sm text-gray-600 line-clamp-2 outline-none focus:bg-gray-50 focus:px-2 focus:-mx-2 rounded cursor-text ${
+              todo.status === "done" ? "line-through text-gray-400" : ""
+            } ${!todo.description ? "text-gray-400 italic" : ""}`}
             title={todo.description || "Click to add description"}
           >
             {todo.description || "Add description..."}
@@ -147,7 +147,7 @@ function TodoCard({
               e.stopPropagation();
               onDelete(todo.id);
             }}
-            className="text-white/70 hover:text-red-300 transition-colors"
+            className="text-gray-400 hover:text-red-600 transition-colors"
             title="Delete"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,8 +188,8 @@ function ColumnDropZone({ status, children, onDrop }: ColumnDropZoneProps) {
   return (
     <div
       ref={dropZoneRef}
-      className={`flex flex-col gap-3 md:flex-1 p-2 rounded-lg transition-colors md:overflow-y-auto md:min-h-0 ${
-        isOver ? "bg-white/10" : ""
+      className={`flex flex-col gap-3 md:flex-1 p-4 rounded-lg transition-colors md:overflow-y-auto md:min-h-0 ${
+        isOver ? "bg-gray-100" : ""
       }`}
     >
       {children}
@@ -205,10 +205,10 @@ export interface TodoBoardProps {
 export function TodoBoard({ state, setState }: TodoBoardProps) {
   const [draggedId, setDraggedId] = useState<string | null>(null);
 
-  const columns: { title: string; status: TodoStatus; bgColor: string }[] = [
-    { title: "Todo", status: "todo", bgColor: "bg-indigo-400/25" },
-    { title: "In-Progress", status: "in-progress", bgColor: "bg-purple-400/25" },
-    { title: "Done", status: "done", bgColor: "bg-teal-400/25" },
+  const columns: { title: string; status: TodoStatus }[] = [
+    { title: "Todo", status: "todo" },
+    { title: "In Progress", status: "in-progress" },
+    { title: "Done", status: "done" },
   ];
 
   const updateTodo = (id: string, title: string, description: string) => {
@@ -248,35 +248,35 @@ export function TodoBoard({ state, setState }: TodoBoardProps) {
   };
 
   return (
-    <div className="w-full h-full flex flex-col p-4 md:p-8">
-      <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center">
-        Todo Board
-      </h1>
-      <p className="text-white/80 text-center italic mb-6 md:mb-8">
-        Manage your tasks with the help of your AI assistant!
-      </p>
+    <div className="w-full h-full flex flex-col px-6 py-12 md:px-12 md:py-16 max-w-7xl mx-auto">
+      <div className="mb-12">
+        <h1 className="text-4xl md:text-5xl font-serif text-gray-900 mb-3">
+          Tasks
+        </h1>
+        <p className="text-gray-600 text-lg">
+          Manage your work with the help of your AI assistant
+        </p>
+      </div>
 
-      <div className="flex flex-col md:grid md:grid-cols-3 gap-4 md:gap-6 flex-1 md:min-h-0 overflow-y-auto md:overflow-visible">
+      <div className="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 flex-1 md:min-h-0 overflow-y-auto md:overflow-visible">
         {columns.map((column) => (
-          <div key={column.status} className="flex flex-col md:min-h-0 gap-3">
-            <div
-              className={`${column.bgColor} backdrop-blur-sm p-3 rounded-xl`}
-            >
-              <h2 className="text-lg font-bold text-white text-center">
+          <div key={column.status} className="flex flex-col md:min-h-0">
+            <div className="mb-6">
+              <h2 className="text-xl font-serif text-gray-900 mb-4">
                 {column.title}
               </h2>
+              
+              {/* Add new task button */}
+              <button
+                onClick={() => addNewTodo(column.status)}
+                className="w-full py-3 text-gray-500 hover:text-gray-900 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 rounded-lg transition-all text-sm flex items-center justify-center gap-2 font-medium"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Add Task
+              </button>
             </div>
-
-            {/* Add new task button */}
-            <button
-              onClick={() => addNewTodo(column.status)}
-              className="w-full py-2.5 text-white/60 hover:text-white/90 border border-dashed border-white/20 hover:border-white/40 hover:bg-white/5 rounded-lg transition-all text-sm flex items-center justify-center gap-2"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Add Task
-            </button>
 
             <ColumnDropZone status={column.status} onDrop={handleDrop}>
               {state.todos
@@ -296,7 +296,7 @@ export function TodoBoard({ state, setState }: TodoBoardProps) {
 
               {state.todos?.filter((todo) => todo.status === column.status)
                 .length === 0 && (
-                <p className="text-center text-white/60 italic text-sm mt-4">
+                <p className="text-center text-gray-400 italic text-sm mt-8">
                   No tasks yet
                 </p>
               )}

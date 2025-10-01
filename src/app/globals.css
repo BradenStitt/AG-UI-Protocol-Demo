@@ -1,24 +1,205 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f9f9f9;
+  --foreground: #1a1a1a;
+  --border: #e5e5e5;
+  --accent: #FF7F50;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: ui-serif, "Libre Baskerville", Georgia, Cambria, "Times New Roman", Times, serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 body,
 html {
   height: 100%;
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  transition: all 0.2s ease;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* CopilotKit Sidebar Color Customization */
+.copilotKitSidebar,
+[class*="copilotKitSidebar"] {
+  background: white !important;
+  border-left: 1px solid var(--border) !important;
+}
+
+.copilotKitHeader,
+[class*="copilotKitHeader"] {
+  background: white !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.copilotKitHeader h2,
+[class*="copilotKitHeader"] h2 {
+  color: var(--foreground) !important;
+  font-family: ui-serif, "Libre Baskerville", Georgia, Cambria, "Times New Roman", Times, serif !important;
+}
+
+.copilotKitHeader button,
+[class*="copilotKitHeader"] button {
+  color: var(--foreground) !important;
+}
+
+.copilotKitMessages,
+[class*="copilotKitMessages"],
+[class*="messagesContainer"] {
+  background: white !important;
+}
+
+/* User Messages */
+.copilotKitMessage[data-role="user"],
+[class*="userMessage"],
+[class*="Message"][class*="user"] {
+  background: var(--foreground) !important;
+  color: white !important;
+}
+
+/* Assistant Messages */
+.copilotKitMessage[data-role="assistant"],
+[class*="assistantMessage"],
+[class*="Message"][class*="assistant"] {
+  background: #f9fafb !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Input Container */
+.copilotKitInput,
+[class*="copilotKitInput"],
+[class*="inputContainer"] {
+  background: white !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* Input Field */
+.copilotKitInput textarea,
+.copilotKitInput input,
+[class*="copilotKitInput"] textarea,
+[class*="copilotKitInput"] input,
+[class*="textInput"] {
+  background: white !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+
+.copilotKitInput textarea:focus,
+.copilotKitInput input:focus,
+[class*="copilotKitInput"] textarea:focus,
+[class*="copilotKitInput"] input:focus,
+[class*="textInput"]:focus {
+  border-color: var(--accent) !important;
+  outline: none !important;
+}
+
+.copilotKitInput textarea::placeholder,
+.copilotKitInput input::placeholder,
+[class*="copilotKitInput"] textarea::placeholder,
+[class*="copilotKitInput"] input::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Send Button and Accent Buttons */
+.copilotKitInput button[type="submit"],
+[class*="copilotKitInput"] button[type="submit"],
+[class*="sendButton"] {
+  background: var(--accent) !important;
+  color: white !important;
+}
+
+.copilotKitInput button[type="submit"]:hover,
+[class*="copilotKitInput"] button[type="submit"]:hover,
+[class*="sendButton"]:hover:not(:disabled) {
+  background: #ff6a3d !important;
+}
+
+/* Chat Toggle Button */
+[class*="chatToggle"],
+[class*="toggleButton"],
+[class*="sidebarToggle"],
+button[aria-label*="Open"],
+button[aria-label*="Close"][aria-label*="chat"],
+button[aria-label*="chat"] {
+  background-color: var(--accent) !important;
+  background: var(--accent) !important;
+}
+
+[class*="chatToggle"]:hover,
+[class*="toggleButton"]:hover,
+[class*="sidebarToggle"]:hover,
+button[aria-label*="Open"]:hover,
+button[aria-label*="chat"]:hover {
+  background-color: #ff6a3d !important;
+  background: #ff6a3d !important;
+}
+
+/* CopilotKit specific button overrides */
+[class*="copilotkit"] button:not([class*="suggestion"]):not([class*="Header"] button),
+.copilotKitFloatingButton,
+[data-copilotkit-toggle-button],
+[data-testid*="chat-toggle"] {
+  background-color: var(--accent) !important;
+}
+
+[class*="copilotkit"] button:not([class*="suggestion"]):not([class*="Header"] button):hover,
+.copilotKitFloatingButton:hover,
+[data-copilotkit-toggle-button]:hover {
+  background-color: #ff6a3d !important;
+}
+
+/* Suggestions */
+.copilotKitSuggestion,
+[class*="copilotKitSuggestion"],
+[class*="suggestionButton"] {
+  background: white !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.copilotKitSuggestion:hover,
+[class*="copilotKitSuggestion"]:hover,
+[class*="suggestionButton"]:hover {
+  background: #f9fafb !important;
+  border-color: var(--foreground) !important;
+}
+
+/* Hide Help and Debug buttons */
+[class*="helpButton"],
+[class*="debugButton"],
+button[aria-label*="Help"],
+button[aria-label*="Debug"],
+[data-testid*="help"],
+[data-testid*="debug"] {
+  display: none !important;
+}
+
+/* Hide Dev Console */
+[class*="devConsole"],
+[class*="DevConsole"],
+[class*="console"],
+[data-testid*="console"],
+[data-testid*="dev-console"],
+[aria-label*="console"],
+[aria-label*="Console"] {
+  display: none !important;
 }
