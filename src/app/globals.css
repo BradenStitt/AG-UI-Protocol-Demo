@@ -5,6 +5,21 @@
   --foreground: #1a1a1a;
   --border: #e5e5e5;
   --accent: #FF7F50;
+  --card-bg: #ffffff;
+  --card-hover: #fafafa;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --border: #262626;
+  --accent: #FF7F50;
+  --card-bg: #171717;
+  --card-hover: #1f1f1f;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
 }
 
 body {
@@ -13,6 +28,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -40,13 +56,13 @@ button, a {
 /* CopilotKit Sidebar Color Customization */
 .copilotKitSidebar,
 [class*="copilotKitSidebar"] {
-  background: white !important;
+  background: var(--card-bg) !important;
   border-left: 1px solid var(--border) !important;
 }
 
 .copilotKitHeader,
 [class*="copilotKitHeader"] {
-  background: white !important;
+  background: var(--card-bg) !important;
   border-bottom: 1px solid var(--border) !important;
 }
 
@@ -64,7 +80,7 @@ button, a {
 .copilotKitMessages,
 [class*="copilotKitMessages"],
 [class*="messagesContainer"] {
-  background: white !important;
+  background: var(--card-bg) !important;
 }
 
 /* User Messages */
@@ -79,7 +95,7 @@ button, a {
 .copilotKitMessage[data-role="assistant"],
 [class*="assistantMessage"],
 [class*="Message"][class*="assistant"] {
-  background: #f9fafb !important;
+  background: var(--background) !important;
   color: var(--foreground) !important;
   border: 1px solid var(--border) !important;
 }
@@ -88,7 +104,7 @@ button, a {
 .copilotKitInput,
 [class*="copilotKitInput"],
 [class*="inputContainer"] {
-  background: white !important;
+  background: var(--card-bg) !important;
   border-top: 1px solid var(--border) !important;
 }
 
@@ -98,7 +114,7 @@ button, a {
 [class*="copilotKitInput"] textarea,
 [class*="copilotKitInput"] input,
 [class*="textInput"] {
-  background: white !important;
+  background: var(--background) !important;
   color: var(--foreground) !important;
   border-color: var(--border) !important;
 }
@@ -171,7 +187,7 @@ button[aria-label*="chat"]:hover {
 .copilotKitSuggestion,
 [class*="copilotKitSuggestion"],
 [class*="suggestionButton"] {
-  background: white !important;
+  background: var(--card-bg) !important;
   color: var(--foreground) !important;
   border: 1px solid var(--border) !important;
 }
@@ -179,7 +195,7 @@ button[aria-label*="chat"]:hover {
 .copilotKitSuggestion:hover,
 [class*="copilotKitSuggestion"]:hover,
 [class*="suggestionButton"]:hover {
-  background: #f9fafb !important;
+  background: var(--card-hover) !important;
   border-color: var(--foreground) !important;
 }
 

@@ -75,7 +75,7 @@ function TodoCard({
   return (
     <div
       ref={cardRef}
-      className={`bg-white p-4 rounded-lg border border-gray-200 relative group hover:shadow-md transition-all ${
+      className={`bg-[var(--card-bg)] p-4 rounded-lg border border-[var(--border)] relative group hover:shadow-md transition-all ${
         !isEditingTitle && !isEditingDescription ? "cursor-move" : ""
       } ${isDragging ? "opacity-50 shadow-lg" : "shadow-sm"}`}
     >
@@ -88,14 +88,14 @@ function TodoCard({
           }}
           className={`flex-shrink-0 w-5 h-5 mt-0.5 rounded border-2 transition-all ${
             todo.status === "done"
-              ? "bg-gray-900 border-gray-900"
-              : "bg-white border-gray-300 hover:border-gray-500"
+              ? "bg-[var(--foreground)] border-[var(--foreground)]"
+              : "bg-[var(--card-bg)] border-[var(--text-muted)] hover:border-[var(--foreground)]"
           }`}
           title={todo.status === "done" ? "Mark incomplete" : "Mark complete"}
         >
           {todo.status === "done" && (
             <svg
-              className="w-full h-full text-white"
+              className="w-full h-full text-[var(--background)]"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -117,8 +117,8 @@ function TodoCard({
             onFocus={() => setIsEditingTitle(true)}
             onBlur={handleTitleBlur}
             onKeyDown={(e) => handleKeyDown(e, true)}
-            className={`font-medium text-gray-900 outline-none focus:bg-gray-50 focus:px-2 focus:-mx-2 rounded cursor-text ${
-              todo.status === "done" ? "line-through text-gray-500" : ""
+            className={`font-medium text-[var(--foreground)] outline-none focus:bg-[var(--background)] focus:px-2 focus:-mx-2 rounded cursor-text ${
+              todo.status === "done" ? "line-through text-[var(--text-secondary)]" : ""
             }`}
             title={todo.title}
           >
@@ -131,9 +131,9 @@ function TodoCard({
             onFocus={() => setIsEditingDescription(true)}
             onBlur={handleDescriptionBlur}
             onKeyDown={(e) => handleKeyDown(e, false)}
-            className={`text-sm text-gray-600 line-clamp-2 outline-none focus:bg-gray-50 focus:px-2 focus:-mx-2 rounded cursor-text ${
-              todo.status === "done" ? "line-through text-gray-400" : ""
-            } ${!todo.description ? "text-gray-400 italic" : ""}`}
+            className={`text-sm text-[var(--text-secondary)] line-clamp-2 outline-none focus:bg-[var(--background)] focus:px-2 focus:-mx-2 rounded cursor-text ${
+              todo.status === "done" ? "line-through text-[var(--text-muted)]" : ""
+            } ${!todo.description ? "text-[var(--text-muted)] italic" : ""}`}
             title={todo.description || "Click to add description"}
           >
             {todo.description || "Add description..."}
@@ -147,7 +147,7 @@ function TodoCard({
               e.stopPropagation();
               onDelete(todo.id);
             }}
-            className="text-gray-400 hover:text-red-600 transition-colors"
+            className="text-[var(--text-muted)] hover:text-red-600 transition-colors"
             title="Delete"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,7 +189,7 @@ function ColumnDropZone({ status, children, onDrop }: ColumnDropZoneProps) {
     <div
       ref={dropZoneRef}
       className={`flex flex-col gap-3 md:flex-1 p-4 rounded-lg transition-colors md:overflow-y-auto md:min-h-0 ${
-        isOver ? "bg-gray-100" : ""
+        isOver ? "bg-[var(--card-hover)]" : ""
       }`}
     >
       {children}
@@ -250,10 +250,10 @@ export function TodoBoard({ state, setState }: TodoBoardProps) {
   return (
     <div className="w-full h-full flex flex-col px-6 py-12 md:px-12 md:py-16 max-w-7xl mx-auto">
       <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-serif text-gray-900 mb-3">
+        <h1 className="text-4xl md:text-5xl font-serif text-[var(--foreground)] mb-3">
           Tasks
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-[var(--text-secondary)] text-lg">
           Manage your work with the help of your AI assistant
         </p>
       </div>
@@ -262,14 +262,14 @@ export function TodoBoard({ state, setState }: TodoBoardProps) {
         {columns.map((column) => (
           <div key={column.status} className="flex flex-col md:min-h-0">
             <div className="mb-6">
-              <h2 className="text-xl font-serif text-gray-900 mb-4">
+              <h2 className="text-xl font-serif text-[var(--foreground)] mb-4">
                 {column.title}
               </h2>
               
               {/* Add new task button */}
               <button
                 onClick={() => addNewTodo(column.status)}
-                className="w-full py-3 text-gray-500 hover:text-gray-900 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 rounded-lg transition-all text-sm flex items-center justify-center gap-2 font-medium"
+                className="w-full py-3 text-[var(--text-secondary)] hover:text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--foreground)] hover:bg-[var(--card-bg)] bg-[var(--background)] rounded-lg transition-all text-sm flex items-center justify-center gap-2 font-medium"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -296,7 +296,7 @@ export function TodoBoard({ state, setState }: TodoBoardProps) {
 
               {state.todos?.filter((todo) => todo.status === column.status)
                 .length === 0 && (
-                <p className="text-center text-gray-400 italic text-sm mt-8">
+                <p className="text-center text-[var(--text-muted)] italic text-sm mt-8">
                   No tasks yet
                 </p>
               )}

@@ -12,11 +12,11 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
     switch (status) {
       case "executing":
       case "inProgress":
-        return "bg-blue-50 text-blue-700 border-blue-200";
+        return "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800";
       case "complete":
-        return "bg-green-50 text-green-700 border-green-200";
+        return "bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800";
       default:
-        return "bg-gray-50 text-gray-700 border-gray-200";
+        return "bg-[var(--background)] text-[var(--text-secondary)] border-[var(--border)]";
     }
   };
 
@@ -42,10 +42,10 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
   };
 
   return (
-    <div className="bg-white rounded-lg p-5 mt-4 mb-4 max-w-md w-full border border-gray-200 shadow-sm">
+    <div className="bg-[var(--card-bg)] rounded-lg p-5 mt-4 mb-4 max-w-md w-full border border-[var(--border)] shadow-sm">
       {/* Header with tool name and status */}
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-gray-900 font-medium text-sm">🔧 {name}</h3>
+        <h3 className="text-[var(--foreground)] font-medium text-sm">🔧 {name}</h3>
         <span className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${getStatusColor()}`}>
           {getStatusIcon()}
           {status}
@@ -57,7 +57,7 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
         <div className="mb-3">
           <button
             onClick={() => setShowArgs(!showArgs)}
-            className="flex items-center gap-2 text-gray-600 text-xs font-medium mb-1.5 hover:text-gray-900 transition-colors"
+            className="flex items-center gap-2 text-[var(--text-secondary)] text-xs font-medium mb-1.5 hover:text-[var(--foreground)] transition-colors"
           >
             <svg 
               className={`w-3 h-3 transition-transform ${showArgs ? 'rotate-90' : ''}`} 
@@ -70,11 +70,11 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
             Arguments
           </button>
           {showArgs && (
-            <div className="bg-gray-50 rounded p-3 space-y-1 border border-gray-200">
+            <div className="bg-[var(--background)] rounded p-3 space-y-1 border border-[var(--border)]">
               {Object.entries(args).map(([key, value]) => (
                 <div key={key} className="flex gap-2">
-                  <span className="text-gray-500 text-xs font-medium">{key}:</span>
-                  <span className="text-gray-700 text-xs font-mono">{JSON.stringify(value)}</span>
+                  <span className="text-[var(--text-muted)] text-xs font-medium">{key}:</span>
+                  <span className="text-[var(--text-secondary)] text-xs font-mono">{JSON.stringify(value)}</span>
                 </div>
               ))}
             </div>
@@ -87,7 +87,7 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
         <div>
           <button
             onClick={() => setShowResult(!showResult)}
-            className="flex items-center gap-2 text-gray-600 text-xs font-medium mb-1.5 hover:text-gray-900 transition-colors"
+            className="flex items-center gap-2 text-[var(--text-secondary)] text-xs font-medium mb-1.5 hover:text-[var(--foreground)] transition-colors"
           >
             <svg 
               className={`w-3 h-3 transition-transform ${showResult ? 'rotate-90' : ''}`} 
@@ -100,8 +100,8 @@ export function BackendToolsCard({ name, args, status, result, themeColor }: Bac
             Result
           </button>
           {showResult && (
-            <div className="bg-gray-50 rounded p-3 border border-gray-200">
-              <pre className="text-gray-700 text-xs font-mono whitespace-pre-wrap break-words">
+            <div className="bg-[var(--background)] rounded p-3 border border-[var(--border)]">
+              <pre className="text-[var(--text-secondary)] text-xs font-mono whitespace-pre-wrap break-words">
                 {typeof result === 'string' ? result : JSON.stringify(result, null, 2)}
               </pre>
             </div>
